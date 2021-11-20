@@ -25,9 +25,7 @@ class IdeasController < ApplicationController
   end
 
   def unauthorized_user
-    unless params[:user_id] == current_user.id.to_s
-      redirect_to root_path
-    end
+    return render json: { message: 'ユーザーが違います' } unless params[:user_id] == current_user.id.to_s
   end
 
   def user_set
