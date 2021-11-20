@@ -1,22 +1,19 @@
 class IdeasController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :create]
-  # before_action :unauthorized_user, only: [:create]
+  before_action :unauthorized_user, only: [:index, :show, :create]
+  before_action :user_set, only: [:index, :show, :create]
 
   def index
-    @ideas = Idea.all
-    @data = @idea.map { |x| x.to_json }
+    @ideas = @user.ideas
+    @data = @ideas.map { |x| x.to_json }
     render json: { status: 200, data: @data }
-  end
-
-  def show
-    @idea = find(paranms[:id])
   end
 
   def create
     @idea = Idea.new(idea_params)
     if @idea.valid?
       @idea.save
-      render json: { status: 201, message: '保存い成功しました'}
+      render json: { status: 201, message: '保存に成功しました'}
     else
       render json: { status: 422, message: 'バリデーションエラー' }
     end
@@ -28,8 +25,13 @@ class IdeasController < ApplicationController
   end
 
   def unauthorized_user
-    unless @idea.user.id == current_user.id
+    unless params[:user_id] == current_user.id.to_s
       redirect_to root_path
     end
   end
+
+  def user_set
+    @user = User.find_by(params[:user_id])
+  end
+
 end
