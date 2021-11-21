@@ -14,11 +14,11 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 WORKDIR /app
 
-COPY . /app
 
-# COPY Gemfile /app/Gemfile
-# COPY Gemfile.lock /app/Gemfile.lock
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
 RUN gem install bundler
 RUN bundle install
 
+COPY . /app
