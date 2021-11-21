@@ -1,24 +1,13 @@
-# README
+# 実行手順
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+`$ docker-compose build` 
 
-Things you may want to cover:
+`$ docker-compose run web rails db:create db:migrate` **初回のみ**
 
-* Ruby version
+`$ docker-compose run web rails db:seed` **初回のみ**
 
-* System dependencies
+`$ docker-compose up -d`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# ログの出力先
+- 標準ログ: log/development.log
+- エラーログ:
