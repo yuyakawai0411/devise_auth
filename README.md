@@ -5,3 +5,6 @@
 `$ docker-compose run web rails db:seed` **初回のみ**
 `$ docker-compose up -d`
 
+# ログの出力先
+- 標準ログ: log/development.log
+- エラーログ:
