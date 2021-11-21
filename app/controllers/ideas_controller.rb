@@ -25,7 +25,7 @@ class IdeasController < ApplicationController
   end
 
   def unauthorized_user
-    return render json: { message: 'ユーザーが違います' } unless params[:user_id] == current_user.id.to_s
+    return render json: { status: 404, message: 'ユーザーが違います' } unless params[:user_id] == current_user.id.to_s
   end
 
   def user_set
